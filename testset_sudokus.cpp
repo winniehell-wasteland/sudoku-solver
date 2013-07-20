@@ -9,6 +9,9 @@ using namespace std;
 
 
 
+#include "solver.h"
+#include "sudoku.h"
+
 
 
 
@@ -3410,12 +3413,12 @@ int timeval_subtract ( struct timeval *result, struct timeval *x, struct timeval
     y->tv_usec += 1000000 * nsec;
     y->tv_sec -= nsec;
   }
-     
+
   /* Compute the time remaining to wait.
      tv_usec is certainly positive. */
   result->tv_sec = x->tv_sec - y->tv_sec;
   result->tv_usec = x->tv_usec - y->tv_usec;
-     
+
   /* Return 1 if result is negative. */
   return x->tv_sec < y->tv_sec;
 }
@@ -3441,7 +3444,7 @@ void dotest( int k, double f, vector<Sudoku*>& s )
   for( vector<Sudoku*>::iterator it = s.begin(), endit = s.end(); it != endit; ++it )
     {
       solve( **it );
-#ifndef NDEBUG
+#ifndef _NDEBUG
       cout << " "<<i << flush; ++i;
       if( !(**it).is_solved() )
 	{ cerr << "NOT SOLVED!" << endl; }
@@ -3455,6 +3458,7 @@ void dotest( int k, double f, vector<Sudoku*>& s )
 
 void test_2()
 {
+  cout << "starting test2" << endl;
   dotest( 2, .3, s_2_3 );
   dotest( 2, .6, s_2_6 );
   dotest( 2, .9, s_2_9 );
@@ -3462,6 +3466,9 @@ void test_2()
 
 void test_3()
 {
+  cout << "starting test3" << endl;
+  //solve(*(s_3_3[91]));
+  //return;
   dotest( 3, .3, s_3_3 );
   dotest( 3, .6, s_3_6 );
   dotest( 3, .9, s_3_9 );
@@ -3469,7 +3476,8 @@ void test_3()
 
 void test_4()
 {
-  dotest( 4, .3, s_4_3 );
+  cout << "starting test4" << endl;
+  //dotest( 4, .3, s_4_3 );
   dotest( 4, .6, s_4_6 );
   dotest( 4, .9, s_4_9 );
 }
